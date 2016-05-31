@@ -120,7 +120,15 @@ module.exports = {
   ]
 };
 
-if ( process.env.MAKE_DLL ) {
+// For initial creating of bundle dlls
+// (quick hack because on windows, 'npm run client-prepare' env variable not set correctly)
+// Using 'npm run client-prepare-windows-quick-hack' the env variable isn't existing,
+// so the below !negated if statement is the 'quick hack'
+
+if ( !process.env.MAKE_DLL ) {
+
+// Part 2 of quick hack... after run webpack command directly, comment above line and uncomment below
+// if ( process.env.MAKE_DLL ) {
   module.exports.entry = {
     vendor   : vendorArray(),
     // App.dll.js is not used, but including it here is required for
@@ -175,51 +183,31 @@ if ( process.env.MAKE_DLL ) {
 
 function vendorArray() {
   return  [
-    'babel',
-    'babel-plugin-typecheck',
-    'body-parser',
-    'compression',
-    'express',
-    'express-session',
-    'history',
-    'file-loader',
+    'babel/polyfill',
+    'history/lib/createBrowserHistory',
     'hoist-non-react-statics',
-    'http-proxy',
-    'invariant',
-    'less',
-    'less-loader',
     'lru-memoize',
-    'map-props',
     'multireducer',
-    'piping',
-    'pretty-error',
-    'query-string',
     'react',
     'react-bootstrap',
     'react-document-meta',
     'react-dom',
-    'react-inline-css',
+    'react-dom/server',
     'react-redux',
     'react-router',
     'react-router-bootstrap',
+    'react-router/lib/RouteUtils',
     'redux',
-    'redux-form',
-    'redux-router',
-    'scroll-behavior',
-    'serialize-javascript',
-    'serve-favicon',
-    'socket.io',
-    'socket.io-client',
-    'superagent',
-    'url-loader',
-    'warning',
-    'babel-runtime/core-js',
-    'react-transform-catch-errors',
-    'react-transform-hmr',
-    'redbox-react',
+    'redux-devtools',
     'redux-devtools',
     'redux-devtools-dock-monitor',
     'redux-devtools-log-monitor',
-    'webpack-hot-middleware'
+    'redux-form',
+    'redux-router',
+    'redux-router/lib/constants',
+    'scroll-behavior/lib/useStandardScroll',
+    'serialize-javascript',
+    'socket.io-client',
+    'superagent'
   ]
 }
