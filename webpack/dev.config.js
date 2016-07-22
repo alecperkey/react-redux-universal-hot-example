@@ -98,7 +98,10 @@ module.exports = {
       'src',
       'node_modules'
     ],
-    extensions: ['', '.json', '.js', '.jsx']
+    extensions: ['', '.json', '.js', '.jsx'],
+    alias: {
+      // moment: './node_modules/moment/'
+    }
   },
   plugins: [
     // hot reload
@@ -110,6 +113,13 @@ module.exports = {
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
     }),
+    new webpack.ProvidePlugin({
+      _: "underscore",
+      m: "moment"
+    }),
+    // new webpack.ProvidePlugin({
+    //   m: "moment"
+    // }),
     webpackIsomorphicToolsPlugin.development()
   ]
 };

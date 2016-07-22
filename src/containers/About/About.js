@@ -11,6 +11,13 @@ export default class About extends Component {
   handleToggleKitten = () => this.setState({showKitten: !this.state.showKitten});
 
   render() {
+    // const mydate = m(new Date());
+    // console.log('moment:', mydate);
+    console.log('underscore:');
+    console.log(_);
+
+    console.log('moment:');
+    console.log(m(new Date()));
     const {showKitten} = this.state;
     const kitten = require('./kitten.jpg');
     return (
